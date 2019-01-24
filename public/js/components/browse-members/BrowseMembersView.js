@@ -1,6 +1,14 @@
 import {
   removeChildren,
+  appendChildren,
+  createDiv,
+  createImg,
+  createH3,
+  createButton,
+  createP,
 } from '../../dom-utils.js';
+
+import BrowseMembers from './BrowseMembers.js';
 
 class BrowseMembersView {
   constructor() {
@@ -25,26 +33,40 @@ class BrowseMembersView {
     } = membersList[currentMemberIndex];
 
     this.clearDom();
+    
+    const containerEl = document.querySelector('#container')
 
-    /*
-      TODO: 動的にDOM要素を作成して、
-      "#container"というidを持つDIV要素の子要素として追加してください...
-
-        <div class="member-profile">
-          <div class="member-image-box">
-            <img src="" alt="(会員のイメージ)">
-          </div>
-          <h3>名前</h3>
-          <p class="member-name">
-            <!-- 会員の名前、たとえば「じじー」-->
-          </p>
-          <h3>一言</h3>
-          <p class="member-text">
-            <!-- 会員の自己紹介 -->
-          </p>
-        </div>
-        <button class="btn-next-member">次へ</button>
-    */
+    const memeberProfileEl = createDiv('', {
+      class: 'member-profile',
+    });
+    const btnEl = createButton('次へ', {
+      class: 'btn-next-member',
+    });
+    
+    appendChildren(containerEl, memeberProfileEl, btnEl);
+    
+    const memberImageBoxEl = createDiv('', {
+      class: 'member-image-box',
+    });
+    const memberImageEl = createImg('', {
+      src: thumbnailUrl,
+      alt: `${name}のイメージ`,
+    });
+    const nameHeadingEl = createH3('名前', {});
+    const memberNameEl = createP(name, {
+      class: 'member-name',
+    });
+    const textHeadingEl = createH3('一言', {});
+    const memberTextEl = createP(quote, {
+      class: 'member-text', 
+    });
+    
+    appendChildren(document.querySelector('#container .member-profile'), memberImageBoxEl, nameHeadingEl, memberNameEl, textHeadingEl, memberTextEl);
+      
+    appendChildren(document.querySelector('#container .member-profile .member-image-box'), memberImageEl);
+      
+    document.querySelector('#container .btn-next-member')
+        .addEventListener('click', handleBrowseNextMember);
   }
 }
 
