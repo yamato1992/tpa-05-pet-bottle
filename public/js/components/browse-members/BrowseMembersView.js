@@ -8,8 +8,6 @@ import {
   createP,
 } from '../../dom-utils.js';
 
-import BrowseMembers from './BrowseMembers.js';
-
 class BrowseMembersView {
   constructor() {
     this.rootEl = document.querySelector('#container');
@@ -33,8 +31,8 @@ class BrowseMembersView {
     } = membersList[currentMemberIndex];
 
     this.clearDom();
-    
-    const containerEl = document.querySelector('#container')
+
+    const containerEl = document.querySelector('#container');
 
     const memeberProfileEl = createDiv('', {
       class: 'member-profile',
@@ -42,9 +40,9 @@ class BrowseMembersView {
     const btnEl = createButton('次へ', {
       class: 'btn-next-member',
     });
-    
+
     appendChildren(containerEl, memeberProfileEl, btnEl);
-    
+
     const memberImageBoxEl = createDiv('', {
       class: 'member-image-box',
     });
@@ -52,21 +50,22 @@ class BrowseMembersView {
       src: thumbnailUrl,
       alt: `${name}のイメージ`,
     });
-    const nameHeadingEl = createH3('名前', {});
+    const nameHeadingEl = createH3('名前');
     const memberNameEl = createP(name, {
       class: 'member-name',
     });
-    const textHeadingEl = createH3('一言', {});
+    const textHeadingEl = createH3('一言');
     const memberTextEl = createP(quote, {
-      class: 'member-text', 
+      class: 'member-text',
     });
-    
-    appendChildren(document.querySelector('#container .member-profile'), memberImageBoxEl, nameHeadingEl, memberNameEl, textHeadingEl, memberTextEl);
-      
-    appendChildren(document.querySelector('#container .member-profile .member-image-box'), memberImageEl);
-      
+
+    appendChildren(document.querySelector('#container .member-profile'),
+      memberImageBoxEl, nameHeadingEl, memberNameEl, textHeadingEl, memberTextEl);
+    appendChildren(document.querySelector('#container .member-profile .member-image-box'),
+      memberImageEl);
+
     document.querySelector('#container .btn-next-member')
-        .addEventListener('click', handleBrowseNextMember);
+      .addEventListener('click', handleBrowseNextMember);
   }
 }
 
